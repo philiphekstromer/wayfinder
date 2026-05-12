@@ -18,3 +18,8 @@
   display: flex;
   margin-top: auto;
 }
+
+.stepIndicator {
+  display: flex;
+  flex-direction: column;
+}
