@@ -1,6 +1,6 @@
 import { useState, type Key } from "react";
 import "./App.css";
-import { OFFICE_ROOMS } from "./data/rooms";
+import { ROOM_DATA_STRUCTURE } from "./data/rooms";
 import {
   Select,
   ListBoxItem,
@@ -13,15 +13,35 @@ import {
 } from "@midas-ds/components";
 
 const App = () => {
-  const [selectedKey, setSelectedKey] = useState<string | null>(null);
+  const [startPoint, setStartPoint] = useState<string | null>(null); // T.ex. "Huvudentré"
+  const [destination, setDestination] = useState<string | null>(null); // T.ex. "Spinnhuset"
   const [currentStep, setCurrentStep] = useState(0);
   // const [viewAll, setViewAll] = useState(false);
   // const [showMap, setShowMap] = useState(false);
 
-  const room = selectedKey ? OFFICE_ROOMS[selectedKey] : undefined;
+  // Hämta tillgängliga mötesrum baserat på vald startpunkt
+  const availableRooms =
+    startPoint && ROOM_DATA_STRUCTURE[startPoint]
+      ? Object.keys(ROOM_DATA_STRUCTURE[startPoint])
+      : [];
 
-  const handleSelect = (key: Key | null) => {
-    setSelectedKey(key === null ? null : String(key));
+  // Hämta vägbeskrivning baserat på startpunkt och mötesryum
+  const routeSteps =
+    startPoint && destination && ROOM_DATA_STRUCTURE[startPoint]
+      ? (ROOM_DATA_STRUCTURE[startPoint][destination] ?? [])
+      : [];
+
+  // Visa vägbeskrivning endast om både startpunkt och destination är valda
+  const showRoute = routeSteps.length > 0;
+
+  // Funktioner för att hantera när användaren väljer startpunkt och mötesrum
+
+  const handleStartingPoint = (key: Key | null) => {
+    setStartPoint(key === null ? null : String(key));
+    setDestination(null);
+  };
+  const handleDestination = (key: Key | null) => {
+    setDestination(key === null ? null : String(key));
     setCurrentStep(0);
     // setViewAll(false);
   };
@@ -30,24 +50,44 @@ const App = () => {
     <div className="mainContainer">
       <h1>Hitta rätt i Presidenten</h1>
 
-      <Select label="Vart ska du?" value={selectedKey} onChange={handleSelect}>
-        {Object.keys(OFFICE_ROOMS).map((k) => (
-          <ListBoxItem key={k} id={k} textValue={k}>
-            {k}
+      {/* Dropdown för att välja startpunkt */}
+      <Select
+        label="Var startar du?"
+        placeholder="Välj en ingång"
+        value={startPoint}
+        onChange={handleStartingPoint}
+      >
+        {Object.keys(ROOM_DATA_STRUCTURE).map((startpoint) => (
+          <ListBoxItem key={startpoint} id={startpoint} textValue={startpoint}>
+            {startpoint}
           </ListBoxItem>
         ))}
       </Select>
 
-      {room && (
+      {/* Dropdown för att välja mötesrum */}
+      <Select
+        label="Vart ska du?"
+        placeholder="Välj ett mötesrum"
+        value={destination}
+        onChange={handleDestination}
+      >
+        {availableRooms.map((roomName) => (
+          <ListBoxItem key={roomName} id={roomName} textValue={roomName}>
+            {roomName}
+          </ListBoxItem>
+        ))}
+      </Select>
+
+      {showRoute && (
         <div className="routeContainer">
           <Card>
             <CardHeader heading="Vägbeskrivning" />
             <CardBody>
               <div className="stepIndicator">
                 <Text slot="description">
-                  Steg {currentStep + 1} av {room.steps.length}
+                  Steg {currentStep + 1} av {routeSteps.length}
                 </Text>
-                <Text>{room.steps[currentStep]} </Text>
+                <Text>{routeSteps[currentStep]} </Text>
               </div>
             </CardBody>
           </Card>
@@ -56,12 +96,12 @@ const App = () => {
             <ButtonGroup>
               <Button
                 onClick={() =>
-                  currentStep < room.steps.length - 1
+                  currentStep < routeSteps.length - 1
                     ? setCurrentStep((prev) => prev + 1)
                     : alert("Du är framme!")
                 }
               >
-                {currentStep === room.steps.length - 1 ? "Klar!" : "Nästa steg"}
+                {currentStep === routeSteps.length - 1 ? "Klar!" : "Nästa steg"}
               </Button>
               <Button
                 variant="secondary"
