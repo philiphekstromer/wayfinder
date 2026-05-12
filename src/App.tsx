@@ -11,6 +11,7 @@ import {
   ButtonGroup,
   Text,
 } from "@midas-ds/components";
+import { Header } from "./components/Header";
 
 const App = () => {
   const [startPoint, setStartPoint] = useState<string | null>(null); // T.ex. "Huvudentré"
@@ -48,7 +49,7 @@ const App = () => {
 
   return (
     <div className="mainContainer">
-      <h1>Hitta rätt i Presidenten</h1>
+      <Header />
 
       {/* Dropdown för att välja startpunkt */}
       <Select
