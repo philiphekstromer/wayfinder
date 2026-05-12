@@ -1,90 +1,43 @@
-import { useState } from "react";
+import { useState, type Key } from "react";
 import "./App.css";
-import { OFFICE_ROOMS } from "./data/rooms"; //
+import { OFFICE_ROOMS } from "./data/rooms";
+import { Select, ListBoxItem, Card, Button, Text } from "@midas-ds/components";
 
 const App = () => {
-  const [selectedKey, setSelectedKey] = useState("");
+  const [selectedKey, setSelectedKey] = useState<string | null>(null);
   const [currentStep, setCurrentStep] = useState(0);
   // const [viewAll, setViewAll] = useState(false);
   // const [showMap, setShowMap] = useState(false);
 
-  const room = OFFICE_ROOMS[selectedKey];
+  const room = selectedKey ? OFFICE_ROOMS[selectedKey] : undefined;
 
-  const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedKey(e.target.value);
+  const handleSelect = (key: Key | null) => {
+    setSelectedKey(key === null ? null : String(key));
     setCurrentStep(0);
     // setViewAll(false);
   };
 
   return (
-    <div
-      style={{
-        padding: "20px",
-        maxWidth: "400px",
-        fontFamily: "sans-serif",
-        color: "#333",
-      }}
-    >
-      <h1 style={{ fontSize: "1.5rem" }}>Rumsguide</h1>
+    <div className="mainContainer">
+      <h1>Hitta rätt i Presidenten</h1>
 
-      <select
-        onChange={handleSelect}
-        style={{ width: "100%", padding: "12px", marginBottom: "20px" }}
-      >
-        <option value="">Vart ska du?</option>
+      <Select label="Vart ska du?" value={selectedKey} onChange={handleSelect}>
         {Object.keys(OFFICE_ROOMS).map((k) => (
-          <option key={k} value={k}>
+          <ListBoxItem key={k} id={k} textValue={k}>
             {k}
-          </option>
+          </ListBoxItem>
         ))}
-      </select>
+      </Select>
 
       {room && (
-        <div
-          style={{
-            border: "1px solid #eee",
-            padding: "20px",
-            borderRadius: "12px",
-            boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
-          }}
-        >
-          {/* LÄGE 1: ETT STEG I TAGET */}
-
-          <div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                marginBottom: "15px",
-              }}
-            >
-              <span
-                style={{
-                  fontSize: "0.8rem",
-                  color: "#888",
-                  fontWeight: "bold",
-                }}
-              >
-                STEG {currentStep + 1} AV {room.steps.length}
-              </span>
-              <button
-                // onClick={() => setViewAll(true)}
-                style={{
-                  background: "none",
-                  border: "none",
-                  color: "#007bff",
-                  cursor: "pointer",
-                  fontSize: "0.8rem",
-                }}
-              >
-                Visa alla steg
-              </button>
-            </div>
+        <div className="routeContainer">
+          <Card>
+            <Text>
+              Steg {currentStep + 1} av {room.steps.length}
+            </Text>
 
             <p
               style={{
-                fontSize: "1.2rem",
                 lineHeight: "1.5",
                 minHeight: "80px",
                 fontWeight: "500",
@@ -92,40 +45,25 @@ const App = () => {
             >
               {room.steps[currentStep]}
             </p>
+          </Card>
 
-            <div style={{ display: "flex", gap: "10px", marginTop: "20px" }}>
-              <button
-                disabled={currentStep === 0}
-                onClick={() => setCurrentStep((prev) => prev - 1)}
-                style={{
-                  flex: 1,
-                  padding: "12px",
-                  borderRadius: "8px",
-                  border: "1px solid #ddd",
-                  backgroundColor: "#fff",
-                }}
-              >
-                Bakåt
-              </button>
-              <button
-                onClick={() =>
-                  currentStep < room.steps.length - 1
-                    ? setCurrentStep((prev) => prev + 1)
-                    : alert("Du är framme!")
-                }
-                style={{
-                  flex: 2,
-                  padding: "12px",
-                  borderRadius: "8px",
-                  border: "none",
-                  backgroundColor: "#28a745",
-                  color: "#fff",
-                  fontWeight: "bold",
-                }}
-              >
-                {currentStep === room.steps.length - 1 ? "Klar!" : "Nästa steg"}
-              </button>
-            </div>
+          <div className="buttonRow">
+            <Button
+              variant="secondary"
+              isDisabled={currentStep === 0}
+              onClick={() => setCurrentStep((prev) => prev - 1)}
+            >
+              Föregående steg
+            </Button>
+            <Button
+              onClick={() =>
+                currentStep < room.steps.length - 1
+                  ? setCurrentStep((prev) => prev + 1)
+                  : alert("Du är framme!")
+              }
+            >
+              {currentStep === room.steps.length - 1 ? "Klar!" : "Nästa steg"}
+            </Button>
           </div>
         </div>
       )}
