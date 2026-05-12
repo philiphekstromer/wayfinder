@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@midas-ds/components": "^17.14.7",
+    "gh-pages": "^6.3.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6"
   },
