@@ -8,6 +8,7 @@ import {
   CardBody,
   CardHeader,
   Button,
+  ButtonGroup,
   Text,
 } from "@midas-ds/components";
 
@@ -52,22 +53,24 @@ const App = () => {
           </Card>
 
           <div className="buttonRow">
-            <Button
-              variant="secondary"
-              isDisabled={currentStep === 0}
-              onClick={() => setCurrentStep((prev) => prev - 1)}
-            >
-              Föregående steg
-            </Button>
-            <Button
-              onClick={() =>
-                currentStep < room.steps.length - 1
-                  ? setCurrentStep((prev) => prev + 1)
-                  : alert("Du är framme!")
-              }
-            >
-              {currentStep === room.steps.length - 1 ? "Klar!" : "Nästa steg"}
-            </Button>
+            <ButtonGroup>
+              <Button
+                onClick={() =>
+                  currentStep < room.steps.length - 1
+                    ? setCurrentStep((prev) => prev + 1)
+                    : alert("Du är framme!")
+                }
+              >
+                {currentStep === room.steps.length - 1 ? "Klar!" : "Nästa steg"}
+              </Button>
+              <Button
+                variant="secondary"
+                isDisabled={currentStep === 0}
+                onClick={() => setCurrentStep((prev) => prev - 1)}
+              >
+                Föregående steg
+              </Button>
+            </ButtonGroup>
           </div>
         </div>
       )}
