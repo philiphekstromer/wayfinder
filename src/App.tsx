@@ -14,6 +14,7 @@ import {
 import { Header } from "./components/Header";
 
 const App = () => {
+  // State för att hålla reda på användarens val och nuvarande steg i vägbeskrivningen
   const [startPoint, setStartPoint] = useState<string | null>(null); // T.ex. "Huvudentré"
   const [destination, setDestination] = useState<string | null>(null); // T.ex. "Spinnhuset"
   const [currentStep, setCurrentStep] = useState(0);
