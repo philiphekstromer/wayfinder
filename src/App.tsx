@@ -1,7 +1,15 @@
 import { useState, type Key } from "react";
 import "./App.css";
 import { OFFICE_ROOMS } from "./data/rooms";
-import { Select, ListBoxItem, Card, Button, Text } from "@midas-ds/components";
+import {
+  Select,
+  ListBoxItem,
+  Card,
+  CardBody,
+  CardHeader,
+  Button,
+  Text,
+} from "@midas-ds/components";
 
 const App = () => {
   const [selectedKey, setSelectedKey] = useState<string | null>(null);
@@ -32,19 +40,15 @@ const App = () => {
       {room && (
         <div className="routeContainer">
           <Card>
-            <Text>
-              Steg {currentStep + 1} av {room.steps.length}
-            </Text>
-
-            <p
-              style={{
-                lineHeight: "1.5",
-                minHeight: "80px",
-                fontWeight: "500",
-              }}
-            >
-              {room.steps[currentStep]}
-            </p>
+            <CardHeader heading="Vägbeskrivning" />
+            <CardBody>
+              <div className="stepIndicator">
+                <Text slot="description">
+                  Steg {currentStep + 1} av {room.steps.length}
+                </Text>
+                <Text>{room.steps[currentStep]} </Text>
+              </div>
+            </CardBody>
           </Card>
 
           <div className="buttonRow">
