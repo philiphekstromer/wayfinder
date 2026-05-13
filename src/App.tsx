@@ -83,12 +83,12 @@ const App = () => {
       {showRoute && (
         <div className="routeContainer">
           <Card>
-            <CardHeader heading="Vägbeskrivning" />
+            <CardHeader
+              heading={`Steg ${currentStep + 1} av ${routeSteps.length}`}
+            />
             <CardBody>
               <div className="stepIndicator">
-                <Text slot="description">
-                  Steg {currentStep + 1} av {routeSteps.length}
-                </Text>
+                <Text slot="description"></Text>
                 <Text>{routeSteps[currentStep]} </Text>
               </div>
             </CardBody>
