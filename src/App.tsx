@@ -11,8 +11,11 @@ import {
   ButtonGroup,
   Text,
   ComboBox,
+  Modal,
+  DialogTrigger,
 } from "@midas-ds/components";
 import { Header } from "./components/Header";
+import { Flag } from "lucide-react";
 
 const App = () => {
   // State för att hålla reda på användarens val och nuvarande steg i vägbeskrivningen
@@ -84,12 +87,25 @@ const App = () => {
       {showRoute && (
         <div className="routeContainer">
           <Card>
-            <CardHeader heading="Vägbeskrivning" />
+            <CardHeader
+              heading={`Steg ${currentStep + 1} av ${routeSteps.length}`}
+            >
+              <DialogTrigger>
+                <Button variant="icon">
+                  <Flag size={20} />
+                </Button>
+                <Modal title="Rapportera fel">
+                  Har du hittat ett fel i detta steg?
+                  <a href="mailto:philip.hjalmrud.ekstromer@migrationsverket.se">
+                    Maila till Philip
+                  </a>
+                  <Button slot={"close"}>Ok!</Button>
+                </Modal>
+              </DialogTrigger>
+            </CardHeader>
             <CardBody>
               <div className="stepIndicator">
-                <Text slot="description">
-                  Steg {currentStep + 1} av {routeSteps.length}
-                </Text>
+                <Text slot="description"></Text>
                 <Text>{routeSteps[currentStep]} </Text>
               </div>
             </CardBody>
