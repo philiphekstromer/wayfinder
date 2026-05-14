@@ -10,6 +10,7 @@ import {
   Button,
   ButtonGroup,
   Text,
+  ComboBox,
 } from "@midas-ds/components";
 import { Header } from "./components/Header";
 
@@ -67,7 +68,7 @@ const App = () => {
       </Select>
 
       {/* Dropdown för att välja mötesrum */}
-      <Select
+      <ComboBox
         label="Vart ska du?"
         placeholder="Välj ett mötesrum"
         value={destination}
@@ -78,7 +79,7 @@ const App = () => {
             {roomName}
           </ListBoxItem>
         ))}
-      </Select>
+      </ComboBox>
 
       {showRoute && (
         <div className="routeContainer">
