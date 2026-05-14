@@ -1,0 +1,1 @@
+export type Entrance = "Personalingång lastkajen" | "Personalingång";
