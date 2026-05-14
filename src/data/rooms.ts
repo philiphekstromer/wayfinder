@@ -2,8 +2,6 @@
 
 
 export const ROOM_DATA_STRUCTURE: Record<string, Record<string, string[]>> = {
-  "Huvudentrén": {
-  },
   "Personalingång lastkajen": {
     "Varvet": [
       "Ta hissen eller trapporna upp till Plan 4.",
