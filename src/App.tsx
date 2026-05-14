@@ -1,6 +1,7 @@
 import { useState, type Key } from "react";
 import "./App.css";
 import { ROOM_DATA_STRUCTURE } from "./data/rooms";
+import { type Entrance } from "./data/types";
 import {
   Select,
   ListBoxItem,
@@ -17,65 +18,74 @@ import {
 import { Header } from "./components/Header";
 import { Flag } from "lucide-react";
 
+const ENTRANCES: Entrance[] = ["Personalingång lastkajen", "Personalingång"];
+
 const App = () => {
-  // State för att hålla reda på användarens val och nuvarande steg i vägbeskrivningen
-  const [startPoint, setStartPoint] = useState<string | null>(null); // T.ex. "Huvudentré"
-  const [destination, setDestination] = useState<string | null>(null); // T.ex. "Spinnhuset"
+  // State för vald ingång, rum och nuvarande steg i vägbeskrivningen
+  const [selectedEntrance, setSelectedEntrance] = useState<Entrance | null>(
+    null,
+  );
+  const [selectedRoom, setSelectedRoom] = useState<string | null>(null);
   const [currentStep, setCurrentStep] = useState(0);
-  // const [viewAll, setViewAll] = useState(false);
-  // const [showMap, setShowMap] = useState(false);
 
-  // Hämta tillgängliga mötesrum baserat på vald startpunkt
-  const availableRooms =
-    startPoint && ROOM_DATA_STRUCTURE[startPoint]
-      ? Object.keys(ROOM_DATA_STRUCTURE[startPoint])
-      : [];
+  // Hämta tillgängliga rum baserat på vald ingång
+  const availableRooms = selectedEntrance
+    ? Object.entries(ROOM_DATA_STRUCTURE)
+        .filter(
+          ([, room]) => room.routesByEntrance[selectedEntrance] !== undefined,
+        )
+        .map(([roomName]) => roomName)
+    : [];
 
-  // Hämta vägbeskrivning baserat på startpunkt och mötesryum
+  // Hämta vägbeskrivning för det valda rummet och ingången
+  const selectedRoomData = selectedRoom
+    ? ROOM_DATA_STRUCTURE[selectedRoom]
+    : undefined;
+
+  // Hämta stegen i vägbeskrivningen för den valda ingången
   const routeSteps =
-    startPoint && destination && ROOM_DATA_STRUCTURE[startPoint]
-      ? (ROOM_DATA_STRUCTURE[startPoint][destination] ?? [])
+    selectedEntrance && selectedRoomData
+      ? (selectedRoomData.routesByEntrance[selectedEntrance]?.steps ?? [])
       : [];
 
-  // Visa vägbeskrivning endast om både startpunkt och destination är valda
+  // Visa vägbeskrivningen om det finns steg att visa
   const showRoute = routeSteps.length > 0;
+  // const selectedFloor = selectedRoomData?.floor; --for later use
 
-  // Funktioner för att hantera när användaren väljer startpunkt och mötesrum
-
-  const handleStartingPoint = (key: Key | null) => {
-    setStartPoint(key === null ? null : String(key));
-    setDestination(null);
-  };
-  const handleDestination = (key: Key | null) => {
-    setDestination(key === null ? null : String(key));
+  const handleEntranceChange = (key: Key | null) => {
+    setSelectedEntrance(key === null ? null : (String(key) as Entrance));
+    setSelectedRoom(null);
     setCurrentStep(0);
-    // setViewAll(false);
+  };
+
+  const handleRoomChange = (key: Key | null) => {
+    setSelectedRoom(key === null ? null : String(key));
+    setCurrentStep(0);
   };
 
   return (
     <div className="mainContainer">
       <Header />
 
-      {/* Dropdown för att välja startpunkt */}
       <Select
         label="Var startar du?"
         placeholder="Välj en ingång"
-        value={startPoint}
-        onChange={handleStartingPoint}
+        value={selectedEntrance}
+        onChange={handleEntranceChange}
       >
-        {Object.keys(ROOM_DATA_STRUCTURE).map((startpoint) => (
-          <ListBoxItem key={startpoint} id={startpoint} textValue={startpoint}>
-            {startpoint}
+        {ENTRANCES.map((entrance) => (
+          <ListBoxItem key={entrance} id={entrance} textValue={entrance}>
+            {entrance}
           </ListBoxItem>
         ))}
       </Select>
 
-      {/* Dropdown för att välja mötesrum */}
       <ComboBox
         label="Vart ska du?"
         placeholder="Välj ett mötesrum"
-        value={destination}
-        onChange={handleDestination}
+        value={selectedRoom}
+        onChange={handleRoomChange}
+        isDisabled={!selectedEntrance}
       >
         {availableRooms.map((roomName) => (
           <ListBoxItem key={roomName} id={roomName} textValue={roomName}>
@@ -104,10 +114,7 @@ const App = () => {
               </DialogTrigger>
             </CardHeader>
             <CardBody>
-              <div className="stepIndicator">
-                <Text slot="description"></Text>
-                <Text>{routeSteps[currentStep]} </Text>
-              </div>
+              <Text>{routeSteps[currentStep]}</Text>
             </CardBody>
           </Card>
 
