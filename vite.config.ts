@@ -4,7 +4,9 @@ import babel from '@rolldown/plugin-babel'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/wayfinder/',
+// DYNAMIC BASE-URL:
+  // if VITE_IS_PREVIEW is set to "true" in our GitHub Action, we use a relative path ''.
+  base: process.env.VITE_IS_PREVIEW === 'true' ? '' : '/wayfinder/',
   plugins: [
     react(),
     babel({ presets: [reactCompilerPreset()] })

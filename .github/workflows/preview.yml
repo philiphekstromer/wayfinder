@@ -20,6 +20,8 @@ jobs:
 
       - name: Install and Build
         if: github.event.action != 'closed' # We don't need the build if we know the preview will be removed
+        env:
+          VITE_IS_PREVIEW: "true"
         run: |
           npm install
           npm run build
