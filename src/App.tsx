@@ -120,22 +120,20 @@ const App = () => {
 
           <div className="buttonRow">
             <ButtonGroup>
-              <Button
-                onClick={() =>
-                  currentStep < routeSteps.length - 1
-                    ? setCurrentStep((prev) => prev + 1)
-                    : alert("Du är framme!")
-                }
-              >
-                {currentStep === routeSteps.length - 1 ? "Klar!" : "Nästa steg"}
-              </Button>
-              <Button
-                variant="secondary"
-                isDisabled={currentStep === 0}
-                onClick={() => setCurrentStep((prev) => prev - 1)}
-              >
-                Föregående steg
-              </Button>
+              {currentStep < routeSteps.length - 1 && (
+                <Button onClick={() => setCurrentStep((prev) => prev + 1)}>
+                  Nästa steg
+                </Button>
+              )}
+
+              {currentStep > 0 && (
+                <Button
+                  variant="secondary"
+                  onClick={() => setCurrentStep((prev) => prev - 1)}
+                >
+                  Föregående steg
+                </Button>
+              )}
             </ButtonGroup>
           </div>
         </div>
