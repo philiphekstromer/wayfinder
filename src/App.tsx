@@ -5,18 +5,13 @@ import { type Entrance } from "./data/types";
 import {
   Select,
   ListBoxItem,
-  Card,
-  CardBody,
-  CardHeader,
   Button,
   ButtonGroup,
-  Text,
   ComboBox,
-  Modal,
-  DialogTrigger,
 } from "@midas-ds/components";
 import { Header } from "./components/Header";
-import { Flag } from "lucide-react";
+
+import { RouteSteps } from "./components/RouteSteps";
 
 const ENTRANCES: Entrance[] = ["Personalingång lastkajen", "Personalingång"];
 
@@ -96,27 +91,7 @@ const App = () => {
 
       {showRoute && (
         <div className="routeContainer">
-          <Card>
-            <CardHeader
-              heading={`Steg ${currentStep + 1} av ${routeSteps.length}`}
-            >
-              <DialogTrigger>
-                <Button variant="icon">
-                  <Flag size={20} />
-                </Button>
-                <Modal title="Rapportera fel">
-                  Har du hittat ett fel i detta steg?
-                  <a href="mailto:philip.hjalmrud.ekstromer@migrationsverket.se">
-                    Maila till Philip
-                  </a>
-                  <Button slot={"close"}>Ok!</Button>
-                </Modal>
-              </DialogTrigger>
-            </CardHeader>
-            <CardBody>
-              <Text>{routeSteps[currentStep]}</Text>
-            </CardBody>
-          </Card>
+          <RouteSteps currentStep={currentStep} routeSteps={routeSteps} />
 
           <div className="buttonRow">
             <ButtonGroup>
