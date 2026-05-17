@@ -8,6 +8,7 @@ import {
   Text,
 } from "@midas-ds/components";
 import { Flag } from "lucide-react";
+import styles from "./RouteSteps.module.css";
 
 interface RouteStepsprops {
   currentStep: number;
@@ -16,7 +17,7 @@ interface RouteStepsprops {
 
 export const RouteSteps = ({ currentStep, routeSteps }: RouteStepsprops) => {
   return (
-    <div className="routeContainer">
+    <div className={styles.routeStepsContainer}>
       <Card>
         <CardHeader heading={`Steg ${currentStep + 1} av ${routeSteps.length}`}>
           <DialogTrigger>
