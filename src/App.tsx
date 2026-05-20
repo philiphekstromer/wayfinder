@@ -90,28 +90,11 @@ const App = () => {
       </ComboBox>
 
       {showRoute && (
-        <div className="routeContainer">
-          <RouteSteps currentStep={currentStep} routeSteps={routeSteps} />
-
-          <div className="buttonRow">
-            <ButtonGroup>
-              {currentStep < routeSteps.length - 1 && (
-                <Button onClick={() => setCurrentStep((prev) => prev + 1)}>
-                  Nästa steg
-                </Button>
-              )}
-
-              {currentStep > 0 && (
-                <Button
-                  variant="secondary"
-                  onClick={() => setCurrentStep((prev) => prev - 1)}
-                >
-                  Föregående steg
-                </Button>
-              )}
-            </ButtonGroup>
-          </div>
-        </div>
+        <RouteSteps
+          currentStep={currentStep}
+          onStepChange={setCurrentStep}
+          routeSteps={routeSteps}
+        />
       )}
     </div>
   );
