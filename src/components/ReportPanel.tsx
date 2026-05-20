@@ -1,5 +1,6 @@
 import { Panel } from "@midas-ds/layout";
-import { Text } from "@midas-ds/components";
+import { Text, Button } from "@midas-ds/components";
+import { Mail } from "lucide-react";
 
 interface ReportPanelProps {
   isOpen: boolean;
@@ -16,13 +17,18 @@ export const ReportPanel = ({ isOpen, onOpenChange }: ReportPanelProps) => {
     >
       <Text>
         Har du hittat ett fel i detta steg? Låt oss veta så att vi kan förbättra
-        vägbeskrivningarna!{" "}
+        vägbeskrivningarna!
       </Text>
-      <Text>
-        <a href="mailto:philip.hjalmrud.ekstromer@migrationsverket.se">
-          Maila till Philip
-        </a>
-      </Text>
+
+      <Button
+        icon={Mail}
+        onPress={() => {
+          window.location.href =
+            "mailto:philip.hjalmrud.ekstromer@migrationsverket.se";
+        }}
+      >
+        Skicka ett mail
+      </Button>
     </Panel>
   );
 };
