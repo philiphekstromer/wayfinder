@@ -4,8 +4,8 @@ import { ROOM_DATA_STRUCTURE } from "./data/rooms";
 import { type Entrance } from "./data/types";
 import { Select, ListBoxItem, ComboBox } from "@midas-ds/components";
 import { Header } from "./components/Header";
-
 import { RouteSteps } from "./components/RouteSteps";
+import { ReportPanel } from "./components/ReportPanel";
 
 const ENTRANCES: Entrance[] = ["Personalingång lastkajen", "Personalingång"];
 
@@ -16,6 +16,9 @@ const App = () => {
   );
   const [selectedRoom, setSelectedRoom] = useState<string | null>(null);
   const [currentStep, setCurrentStep] = useState(0);
+
+  //State för panel
+  const [isReportOpen, setIsReportOpen] = useState(false);
 
   // Hämta tillgängliga rum baserat på vald ingång
   const availableRooms = selectedEntrance
@@ -88,8 +91,10 @@ const App = () => {
           currentStep={currentStep}
           onStepChange={setCurrentStep}
           routeSteps={routeSteps}
+          onOpenReport={() => setIsReportOpen(true)}
         />
       )}
+      <ReportPanel isOpen={isReportOpen} onOpenChange={setIsReportOpen} />
     </div>
   );
 };
