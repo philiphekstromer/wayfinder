@@ -4,8 +4,6 @@ import {
   Card,
   CardBody,
   CardHeader,
-  DialogTrigger,
-  Modal,
   Text,
 } from "@midas-ds/components";
 import { Flag } from "lucide-react";
@@ -15,12 +13,14 @@ interface RouteStepsprops {
   currentStep: number;
   onStepChange: (step: number) => void;
   routeSteps: string[];
+  onOpenReport?: () => void;
 }
 
 export const RouteSteps = ({
   currentStep,
   onStepChange,
   routeSteps,
+  onOpenReport,
 }: RouteStepsprops) => {
   return (
     <>
@@ -29,18 +29,9 @@ export const RouteSteps = ({
           <CardHeader
             heading={`Steg ${currentStep + 1} av ${routeSteps.length}`}
           >
-            <DialogTrigger>
-              <Button variant="icon">
-                <Flag size={20} />
-              </Button>
-              <Modal title="Rapportera fel">
-                Har du hittat ett fel i detta steg?
-                <a href="mailto:philip.hjalmrud.ekstromer@migrationsverket.se">
-                  Maila till Philip
-                </a>
-                <Button slot={"close"}>Ok!</Button>
-              </Modal>
-            </DialogTrigger>
+            <Button variant="icon" onPress={onOpenReport}>
+              <Flag size={20} />
+            </Button>
           </CardHeader>
           <CardBody>
             <Text>{routeSteps[currentStep]}</Text>
