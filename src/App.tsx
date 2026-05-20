@@ -2,21 +2,10 @@ import { useState, type Key } from "react";
 import "./App.css";
 import { ROOM_DATA_STRUCTURE } from "./data/rooms";
 import { type Entrance } from "./data/types";
-import {
-  Select,
-  ListBoxItem,
-  Card,
-  CardBody,
-  CardHeader,
-  Button,
-  ButtonGroup,
-  Text,
-  ComboBox,
-  Modal,
-  DialogTrigger,
-} from "@midas-ds/components";
+import { Select, ListBoxItem, ComboBox } from "@midas-ds/components";
 import { Header } from "./components/Header";
-import { Flag } from "lucide-react";
+
+import { RouteSteps } from "./components/RouteSteps";
 
 const ENTRANCES: Entrance[] = ["Personalingång lastkajen", "Personalingång"];
 
@@ -95,48 +84,11 @@ const App = () => {
       </ComboBox>
 
       {showRoute && (
-        <div className="routeContainer">
-          <Card>
-            <CardHeader
-              heading={`Steg ${currentStep + 1} av ${routeSteps.length}`}
-            >
-              <DialogTrigger>
-                <Button variant="icon">
-                  <Flag size={20} />
-                </Button>
-                <Modal title="Rapportera fel">
-                  Har du hittat ett fel i detta steg?
-                  <a href="mailto:philip.hjalmrud.ekstromer@migrationsverket.se">
-                    Maila till Philip
-                  </a>
-                  <Button slot={"close"}>Ok!</Button>
-                </Modal>
-              </DialogTrigger>
-            </CardHeader>
-            <CardBody>
-              <Text>{routeSteps[currentStep]}</Text>
-            </CardBody>
-          </Card>
-
-          <div className="buttonRow">
-            <ButtonGroup>
-              {currentStep < routeSteps.length - 1 && (
-                <Button onClick={() => setCurrentStep((prev) => prev + 1)}>
-                  Nästa steg
-                </Button>
-              )}
-
-              {currentStep > 0 && (
-                <Button
-                  variant="secondary"
-                  onClick={() => setCurrentStep((prev) => prev - 1)}
-                >
-                  Föregående steg
-                </Button>
-              )}
-            </ButtonGroup>
-          </div>
-        </div>
+        <RouteSteps
+          currentStep={currentStep}
+          onStepChange={setCurrentStep}
+          routeSteps={routeSteps}
+        />
       )}
     </div>
   );
