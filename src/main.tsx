@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import "@midas-ds/components/default.css";
+import "@midas-ds/layout/default.css";
 import App from "./App.tsx";
 
 createRoot(document.getElementById("root")!).render(
