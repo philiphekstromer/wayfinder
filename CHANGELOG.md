@@ -1,4 +1,4 @@
-## [0.1.0] - 2026-05-16
+## [1.0.0] - 2026-05-21
 
 ### 🚀 Features
 
@@ -8,6 +8,7 @@
 - Add user feedback button
 - Add instructions for all meeting rooms on floor 4 
 - New data structure 
+- ReportPanel
 
 ### 🐛 Bug Fixes
 
@@ -28,14 +29,18 @@
 - Add predeploy script
 - Add pr-preview action 
 - Dynamic base-url
-- Add git-cliff
-- Add cliff config file
+
+### 🚜 Refactor
+
+- Move step-by-step instructions to component 
 
 ### 📚 Documentation
 
 - Add readme
 - Add todo.md
 - Update readme
+- Update todo
+- Changelog
 
 ### ⚙️ Miscellaneous Tasks
 
