@@ -7,7 +7,6 @@ import {
   ListBoxItem,
   ComboBox,
   Button,
-  Text,
   Heading,
 } from "@midas-ds/components";
 import { Header } from "./components/Header";
