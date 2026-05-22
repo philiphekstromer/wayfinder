@@ -7,10 +7,6 @@
   overflow: auto;
 }
 
-.buttonRow {
-  margin-top: auto;
-}
-
 .stepIndicator {
   display: flex;
   flex-direction: column;
