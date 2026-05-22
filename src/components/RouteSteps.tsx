@@ -60,7 +60,7 @@ export const RouteSteps = ({
         </Card>
       </div>
 
-      <div className="buttonRow">
+      <div className={styles.buttonRow}>
         <ButtonGroup>
           {currentStep < routeSteps.length - 1 && (
             <Button onClick={() => onStepChange(currentStep + 1)}>
