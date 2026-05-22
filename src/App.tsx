@@ -2,10 +2,18 @@ import { useState, type Key } from "react";
 import "./App.css";
 import { ROOM_DATA_STRUCTURE } from "./data/rooms";
 import { type Entrance } from "./data/types";
-import { Select, ListBoxItem, ComboBox } from "@midas-ds/components";
+import {
+  Select,
+  ListBoxItem,
+  ComboBox,
+  Button,
+  Text,
+  Heading,
+} from "@midas-ds/components";
 import { Header } from "./components/Header";
 import { RouteSteps } from "./components/RouteSteps";
 import { ReportPanel } from "./components/ReportPanel";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 const ENTRANCES: Entrance[] = ["Personalingång lastkajen", "Personalingång"];
 
@@ -16,6 +24,7 @@ const App = () => {
   );
   const [selectedRoom, setSelectedRoom] = useState<string | null>(null);
   const [currentStep, setCurrentStep] = useState(0);
+  const [showAllSteps, setShowAllSteps] = useState(false);
 
   //State för panel
   const [isReportOpen, setIsReportOpen] = useState(false);
@@ -87,12 +96,32 @@ const App = () => {
       </ComboBox>
 
       {showRoute && (
-        <RouteSteps
-          currentStep={currentStep}
-          onStepChange={setCurrentStep}
-          routeSteps={routeSteps}
-          onOpenReport={() => setIsReportOpen(true)}
-        />
+        <>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Heading level={3}>Vägbeskrivning</Heading>
+            <Button
+              variant="tertiary"
+              icon={showAllSteps ? ChevronUp : ChevronDown}
+              onClick={() => setShowAllSteps((prev) => !prev)}
+            >
+              {showAllSteps ? "Visa ett steg" : "Visa alla steg"}
+            </Button>
+          </div>
+
+          <RouteSteps
+            currentStep={currentStep}
+            onStepChange={setCurrentStep}
+            routeSteps={routeSteps}
+            showAllSteps={showAllSteps}
+            onOpenReport={() => setIsReportOpen(true)}
+          />
+        </>
       )}
       <ReportPanel isOpen={isReportOpen} onOpenChange={setIsReportOpen} />
     </div>
