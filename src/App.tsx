@@ -2,13 +2,7 @@ import { useState, type Key } from "react";
 import "./App.css";
 import { ROOM_DATA_STRUCTURE } from "./data/rooms";
 import { type Entrance } from "./data/types";
-import {
-  Select,
-  ListBoxItem,
-  ComboBox,
-  Button,
-  Heading,
-} from "@midas-ds/components";
+import { Select, ListBoxItem, ComboBox, Heading } from "@midas-ds/components";
 import { Header } from "./components/Header";
 import { RouteSteps } from "./components/RouteSteps";
 import { ReportPanel } from "./components/ReportPanel";

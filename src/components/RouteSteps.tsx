@@ -5,7 +5,6 @@ import {
   CardBody,
   CardHeader,
   Text,
-  Heading,
 } from "@midas-ds/components";
 import { Flag, ChevronDown, ChevronUp } from "lucide-react";
 import styles from "./RouteSteps.module.css";
