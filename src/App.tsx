@@ -12,7 +12,6 @@ import {
 import { Header } from "./components/Header";
 import { RouteSteps } from "./components/RouteSteps";
 import { ReportPanel } from "./components/ReportPanel";
-import { ChevronDown, ChevronUp } from "lucide-react";
 
 const ENTRANCES: Entrance[] = ["Personalingång lastkajen", "Personalingång"];
 
@@ -104,20 +103,13 @@ const App = () => {
             }}
           >
             <Heading level={3}>Vägbeskrivning</Heading>
-            <Button
-              variant="tertiary"
-              icon={showAllSteps ? ChevronUp : ChevronDown}
-              onClick={() => setShowAllSteps((prev) => !prev)}
-            >
-              {showAllSteps ? "Visa ett steg" : "Visa alla steg"}
-            </Button>
           </div>
-
           <RouteSteps
             currentStep={currentStep}
             onStepChange={setCurrentStep}
             routeSteps={routeSteps}
             showAllSteps={showAllSteps}
+            onShowAllStepsChange={setShowAllSteps}
             onOpenReport={() => setIsReportOpen(true)}
           />
         </>
