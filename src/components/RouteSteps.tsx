@@ -70,7 +70,6 @@ export const RouteSteps = ({
         </Card>
         <Button
           variant="tertiary"
-          icon={showAllSteps ? ChevronUp : ChevronDown}
           onClick={() => onShowAllStepsChange?.(!showAllSteps)}
         >
           {showAllSteps ? "Visa ett steg" : "Visa alla steg"}
