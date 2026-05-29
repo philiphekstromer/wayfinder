@@ -6,7 +6,7 @@ import {
   CardHeader,
   Text,
 } from "@midas-ds/components";
-import { Flag, ChevronDown, ChevronUp } from "lucide-react";
+import { Flag } from "lucide-react";
 import styles from "./RouteSteps.module.css";
 
 interface RouteStepsprops {
