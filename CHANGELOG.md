@@ -1,3 +1,18 @@
+## [1.1.0] - 2026-06-03
+
+### 🚀 Features
+
+- Show all steps with disclosure pattern
+
+### 🐛 Bug Fixes
+
+- Add css to center the app on desktop
+- Fix css to solve overflow issues
+
+### 📚 Documentation
+
+- Update changelog for v.1.0.0
+
 ## [1.0.0] - 2026-05-21
 
 ### 🚀 Features
@@ -6,8 +21,8 @@
 - Add ButtonGroup
 - Header component
 - Add user feedback button
-- Add instructions for all meeting rooms on floor 4 
-- New data structure 
+- Add instructions for all meeting rooms on floor 4
+- New data structure
 - ReportPanel
 
 ### 🐛 Bug Fixes
@@ -27,12 +42,12 @@
 - Add build script
 - Update base
 - Add predeploy script
-- Add pr-preview action 
+- Add pr-preview action
 - Dynamic base-url
 
 ### 🚜 Refactor
 
-- Move step-by-step instructions to component 
+- Move step-by-step instructions to component
 
 ### 📚 Documentation
 
