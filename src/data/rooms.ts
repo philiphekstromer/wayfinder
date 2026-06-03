@@ -1,4 +1,12 @@
 import { type Entrance } from "./types";
+import plan4Image from "../assets/Plan4.png";
+
+export const FLOOR_MAP_URLS: Record<string, string> = {
+  "1": plan4Image,
+  "2": plan4Image,
+  "3": plan4Image,
+  "4": plan4Image,
+};
 
 // Definition av typer för tydlig dokumentation
 interface Route {
