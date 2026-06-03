@@ -2,7 +2,7 @@
 
 ### 🚀 Features
 
-- Show all steps with disclosure pattern (#25)
+- Show all steps with disclosure pattern
 
 ### 🐛 Bug Fixes
 
