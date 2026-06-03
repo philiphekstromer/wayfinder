@@ -1,11 +1,11 @@
 import { useState, type Key } from "react";
-import "./App.css";
 import { ROOM_DATA_STRUCTURE } from "./data/rooms";
 import { type Entrance } from "./data/types";
-import { Select, ListBoxItem, ComboBox } from "@midas-ds/components";
+import { Select, ListBoxItem, ComboBox, Heading } from "@midas-ds/components";
 import { Header } from "./components/Header";
 import { RouteSteps } from "./components/RouteSteps";
 import { ReportPanel } from "./components/ReportPanel";
+import styles from "./App.module.css";
 
 const ENTRANCES: Entrance[] = ["Personalingång lastkajen", "Personalingång"];
 
@@ -16,6 +16,7 @@ const App = () => {
   );
   const [selectedRoom, setSelectedRoom] = useState<string | null>(null);
   const [currentStep, setCurrentStep] = useState(0);
+  const [showAllSteps, setShowAllSteps] = useState(false);
 
   //State för panel
   const [isReportOpen, setIsReportOpen] = useState(false);
@@ -56,7 +57,7 @@ const App = () => {
   };
 
   return (
-    <div className="mainContainer">
+    <div className={styles.mainContainer}>
       <Header />
 
       <Select
@@ -87,12 +88,19 @@ const App = () => {
       </ComboBox>
 
       {showRoute && (
-        <RouteSteps
-          currentStep={currentStep}
-          onStepChange={setCurrentStep}
-          routeSteps={routeSteps}
-          onOpenReport={() => setIsReportOpen(true)}
-        />
+        <>
+          <div className={styles.routeHeadingContainer}>
+            <Heading level={3}>Vägbeskrivning</Heading>
+          </div>
+          <RouteSteps
+            currentStep={currentStep}
+            onStepChange={setCurrentStep}
+            routeSteps={routeSteps}
+            showAllSteps={showAllSteps}
+            onShowAllStepsChange={setShowAllSteps}
+            onOpenReport={() => setIsReportOpen(true)}
+          />
+        </>
       )}
       <ReportPanel isOpen={isReportOpen} onOpenChange={setIsReportOpen} />
     </div>

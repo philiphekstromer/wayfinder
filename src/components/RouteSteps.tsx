@@ -13,6 +13,8 @@ interface RouteStepsprops {
   currentStep: number;
   onStepChange: (step: number) => void;
   routeSteps: string[];
+  showAllSteps?: boolean;
+  onShowAllStepsChange?: (value: boolean) => void;
   onOpenReport?: () => void;
 }
 
@@ -20,8 +22,37 @@ export const RouteSteps = ({
   currentStep,
   onStepChange,
   routeSteps,
+  showAllSteps = false,
+  onShowAllStepsChange,
   onOpenReport,
 }: RouteStepsprops) => {
+  if (showAllSteps) {
+    return (
+      <>
+        <div className={styles.routeStepsContainer}>
+          {routeSteps.map((step, index) => (
+            <Card key={index}>
+              <CardHeader heading={`Steg ${index + 1} av ${routeSteps.length}`}>
+                <Button variant="icon" onPress={onOpenReport}>
+                  <Flag size={20} />
+                </Button>
+              </CardHeader>
+              <CardBody>
+                <Text>{step}</Text>
+              </CardBody>
+            </Card>
+          ))}
+          <Button
+            variant="tertiary"
+            onClick={() => onShowAllStepsChange?.(!showAllSteps)}
+          >
+            {showAllSteps ? "Visa ett steg" : "Visa alla steg"}
+          </Button>
+        </div>
+      </>
+    );
+  }
+
   return (
     <>
       <div className={styles.routeStepsContainer}>
@@ -37,9 +68,15 @@ export const RouteSteps = ({
             <Text>{routeSteps[currentStep]}</Text>
           </CardBody>
         </Card>
+        <Button
+          variant="tertiary"
+          onClick={() => onShowAllStepsChange?.(!showAllSteps)}
+        >
+          {showAllSteps ? "Visa ett steg" : "Visa alla steg"}
+        </Button>
       </div>
 
-      <div className="buttonRow">
+      <div className={styles.buttonRow}>
         <ButtonGroup>
           {currentStep < routeSteps.length - 1 && (
             <Button onClick={() => onStepChange(currentStep + 1)}>

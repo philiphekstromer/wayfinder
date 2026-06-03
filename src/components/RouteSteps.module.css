@@ -7,3 +7,7 @@
   padding-bottom: 1rem;
   overflow: auto;
 }
+
+.buttonRow {
+  margin-top: auto;
+}
