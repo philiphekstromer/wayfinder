@@ -4,6 +4,7 @@ This is the todo for the wayfinder app
 
 # BACKLOG
 
+- [ ] Add first time use explainer (in panel)
 - [ ] Update the favicon!
 - [ ] Update floor map images with clearer markings for the two entrances
 - [ ] Add wayfinding instructions for floor 3
