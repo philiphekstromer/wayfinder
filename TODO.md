@@ -4,6 +4,7 @@ This is the todo for the wayfinder app
 
 # BACKLOG
 
+- [ ] Update the favicon!
 - [ ] Update floor map images with clearer markings for the two entrances
 - [ ] Add wayfinding instructions for floor 3
 - [ ] Add verified flag to data structure and a way to show to users that instructions are unverified
