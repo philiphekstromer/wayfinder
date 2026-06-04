@@ -1,13 +1,19 @@
-## [1.1.0] - 2026-06-03
+## [1.2.0] - 2026-06-04
 
 ### 🚀 Features
 
-- Show all steps with disclosure pattern
+- Floor maps
+
+## [1.1.0] - 2026-06-03
 
 ### 🐛 Bug Fixes
 
 - Add css to center the app on desktop
 - Fix css to solve overflow issues
+
+### 🚀 Features
+
+- Show all steps with disclosure pattern
 
 ### 📚 Documentation
 
