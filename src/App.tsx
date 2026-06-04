@@ -103,10 +103,10 @@ const App = () => {
             <Heading level={3}>Vägbeskrivning</Heading>
             <DialogTrigger>
               <Button variant="icon" icon={Map}></Button>
-              <Modal title={`Karta för plan ${selectedFloor}`}>
+              <Modal title={`Karta över plan ${selectedFloor}`}>
                 <img
                   src={floorMapUrl!}
-                  alt={`Karta för plan ${selectedFloor}`}
+                  alt={`Karta över plan ${selectedFloor}`}
                 />
               </Modal>
             </DialogTrigger>
