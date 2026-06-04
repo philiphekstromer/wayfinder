@@ -1,11 +1,20 @@
 import { useState, type Key } from "react";
-import { ROOM_DATA_STRUCTURE } from "./data/rooms";
+import { FLOOR_MAP_URLS, ROOM_DATA_STRUCTURE } from "./data/rooms";
 import { type Entrance } from "./data/types";
-import { Select, ListBoxItem, ComboBox, Heading } from "@midas-ds/components";
+import {
+  Select,
+  ListBoxItem,
+  ComboBox,
+  Heading,
+  Button,
+  Modal,
+  DialogTrigger,
+} from "@midas-ds/components";
 import { Header } from "./components/Header";
 import { RouteSteps } from "./components/RouteSteps";
 import { ReportPanel } from "./components/ReportPanel";
 import styles from "./App.module.css";
+import { Map } from "lucide-react";
 
 const ENTRANCES: Entrance[] = ["Personalingång lastkajen", "Personalingång"];
 
@@ -43,7 +52,8 @@ const App = () => {
 
   // Visa vägbeskrivningen om det finns steg att visa
   const showRoute = routeSteps.length > 0;
-  // const selectedFloor = selectedRoomData?.floor; --for later use
+  const selectedFloor = selectedRoomData?.floor;
+  const floorMapUrl = selectedFloor ? FLOOR_MAP_URLS[selectedFloor] : null;
 
   const handleEntranceChange = (key: Key | null) => {
     setSelectedEntrance(key === null ? null : (String(key) as Entrance));
@@ -91,6 +101,15 @@ const App = () => {
         <>
           <div className={styles.routeHeadingContainer}>
             <Heading level={3}>Vägbeskrivning</Heading>
+            <DialogTrigger>
+              <Button variant="icon" icon={Map}></Button>
+              <Modal title={`Karta över plan ${selectedFloor}`}>
+                <img
+                  src={floorMapUrl!}
+                  alt={`Karta över plan ${selectedFloor}`}
+                />
+              </Modal>
+            </DialogTrigger>
           </div>
           <RouteSteps
             currentStep={currentStep}
