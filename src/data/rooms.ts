@@ -1,10 +1,9 @@
 import { type Entrance } from "./types";
 import plan4Image from "../assets/Plan4.png";
+import plan3Image from "../assets/Plan3.png";
 
 export const FLOOR_MAP_URLS: Record<string, string> = {
-  "1": plan4Image,
-  "2": plan4Image,
-  "3": plan4Image,
+  "3": plan3Image,
   "4": plan4Image,
 };
 
@@ -302,6 +301,27 @@ export const ROOM_DATA_STRUCTURE: Record<string, Room> = {
           "Ta hissen eller trapporna upp till Plan 4.",
           "Ta dörren till höger och gå åt höger. Sväng höger och gå mot köket.",
           "Sväng vänster in i korridoren vid köket. Spetsen ligger på vänster sida i slutet av korridoren."
+        ]
+      }
+    }
+  },
+  "Torget": {
+    floor: 3,
+    routesByEntrance: {
+      "Personalingång lastkajen": {
+        steps: [
+         "Ta hissen eller trapporna upp till Plan 3.",
+          "Ta dörren till höger och gå mot höger. Sväng direkt höger och gå mot korridoren.",
+          "Gå rakt fram genom korridoren hela vägen ner till fikarummet på andra sidan huset.",
+          "Sväng vänster i första korridoren när du kommit ut till fikarummet",
+          "Torget är på höger sida i början av korridoren"
+        ]
+      },
+      "Personalingång": {
+        steps: [
+          "Ta hissen eller trapporna upp till Plan 3.",
+          "Ta dörren till höger och gå åt höger. Gå rakt fram in i korridoren",
+          "Torget ligger på höger sida i början av korridoren."
         ]
       }
     }
